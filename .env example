@@ -1,0 +1,8 @@
+LDSP_SERVER=
+ 
+# dn
+ROOT_DN=
+
+# ldap user and password
+LDAP_USER_NAME=
+LDAP_PASSWORD=
