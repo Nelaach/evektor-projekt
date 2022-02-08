@@ -1,2 +1,3 @@
 flask-server/.env
 flask-server/venv/
+client/
