@@ -1,2 +1,2 @@
-.env
-venv/
+flask-server/.env
+flask-server/venv/
