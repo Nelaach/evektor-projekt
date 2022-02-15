@@ -1,7 +1,7 @@
 from ldap3 import Server, Connection, ALL, SUBTREE
 
 from ldap3.core.exceptions import LDAPException, LDAPBindError
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from dotenv import load_dotenv
 import os
 from getpass import getuser
@@ -13,7 +13,7 @@ app = Flask(__name__)
 load_dotenv()
 
 # ldap
-ldsp_server = os.getenv("LDAP_SERVER")
+ldap_server = os.getenv("LDAP_SERVER")
 root_dn = os.getenv("ROOT_DN")
 ldap_user_name = os.getenv("LDAP_USER_NAME")
 ldap_password = os.getenv("LDAP_PASSWORD")
@@ -30,15 +30,19 @@ headers = {
 
 @app.route("/")
 def home():
-    return render_template('home.html', navbar = [current_user, isInGuesWifiGroup()])
+    is_in_guestWIFI_group = isInGuesWifiGroup()
+    print(f"In WIFI group: {is_in_guestWIFI_group}")
+    return render_template('home.html', navbar = [current_user, is_in_guestWIFI_group])
 
 @app.route("/users")
 def seznam():
     r=requests.get(f"{snipeit}users/", headers = headers, verify=False)
     data = r.json()
-    zamestnanci = data["rows"]
+    zamestnanci = {"zamestnanci": data["rows"]}
     is_in_guestWifi_group = isInGuesWifiGroup()
+
     return json.dumps(zamestnanci)
+
     return render_template('seznam.html', navbar = [current_user, is_in_guestWifi_group], zamestnanci = zamestnanci)
 
 @app.route('/seznam/<id>')
@@ -61,7 +65,7 @@ def members():
     return{"members":["Member1", "Member2", "Member3", "Member4", "Member5", "Members"]}
 
 def isInGuesWifiGroup():
-    server = Server(ldsp_server, get_info=ALL)
+    server = Server(ldap_server, get_info=ALL)
     connection = Connection(server,
                             user=ldap_user_name,
                             password=ldap_password,

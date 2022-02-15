@@ -26,19 +26,32 @@ function App() {
   }, [])  // [] for it only run once 
   
   return (
-      <div>
+    <table>
+        <thead>
+        <tr>
+            <th>Jméno a přijmení</th>
+            <th>Email</th>
+            <th>Assets</th>
 
+        </tr>
+        </thead>
+        <tbody>
         {(typeof data.zamestnanci === 'undefined') ? (
             <p>Loading...</p>
         ) : (
-            data.zamestnanci.map((emp, i) => (
-                <p key={i}>{emp}</p>
-            ))
+            data.zamestnanci.map(emp => 
+                <tr> <td>{emp.name}</td></tr>
+                
+                
+            )
+
+            // data.zamestnanci.map((emp, i) => (
+            //     <p key="{i}"> {emp}</p>
+            // ))
         )}
-	
-    </div>
+	    </tbody>
+    </table>
   );
 }
 
 export default App;
-
