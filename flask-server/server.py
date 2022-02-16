@@ -20,10 +20,8 @@ ldap_password = os.getenv("LDAP_PASSWORD")
 authorization = os.getenv("AUTHORIZATION")
 snipeit = os.getenv("SNIPEIT")
 
-current_user = getuser()
-navbar = []
-
-headers = {
+CURRENT_USER = getuser()
+HEADERS = {
     'Content-Type': 'application/json',
     'Authorization' : authorization,
     # 'Accept':'application/json'
@@ -33,23 +31,28 @@ headers = {
 def home():
     is_in_guestWIFI_group = isInGuesWifiGroup()
     print(f"In WIFI group: {is_in_guestWIFI_group}")
-    return render_template('home.html', navbar = [current_user, is_in_guestWIFI_group])
+    return render_template('home.html', navbar = [CURRENT_USER, is_in_guestWIFI_group])
+
+@app.route("/users/loggedInUser")
+def logged_in_user():
+    current_user = getuser()
+    return jsonify(current_user)
 
 @app.route("/users")
 def seznam():
-    r=requests.get(f"{snipeit}users/", headers = headers, verify=False)
+    r=requests.get(f"{snipeit}users/", headers = HEADERS, verify=False)
     data = r.json()
     zamestnanci = {"zamestnanci": data["rows"]}
     is_in_guestWifi_group = isInGuesWifiGroup()
 
     return json.dumps(zamestnanci)
 
-    return render_template('seznam.html', navbar = [current_user, is_in_guestWifi_group], zamestnanci = zamestnanci)
+    return render_template('seznam.html', navbar = [CURRENT_USER, is_in_guestWifi_group], zamestnanci = zamestnanci)
 
 @app.route('/seznam/<id>')
 def zamestnanec(id):
-    return render_template('zamestnanec.html', navbar = [current_user, isInGuesWifiGroup()], id = id)
-#    r=requests.get(f"{snipeit}hardware/", headers = headers, verify=False)
+    return render_template('zamestnanec.html', navbar = [CURRENT_USER, isInGuesWifiGroup()], id = id)
+#    r=requests.get(f"{snipeit}hardware/", headers = HEADERS, verify=False)
 #    data = r.json()
 #    assets = data["rows"]
 #    persons_asset=[]
@@ -59,7 +62,7 @@ def zamestnanec(id):
 #            persons_asset = asset
 #            break
 #
-#    return render_template('zamestnanec.html', navbar = [current_user, isInGuesWifiGroup()], persons_asset = persons_asset)
+#    return render_template('zamestnanec.html', navbar = [CURRENT_USER, isInGuesWifiGroup()], persons_asset = persons_asset)
 
 @app.route("/members")
 def members():
@@ -71,7 +74,7 @@ def isInGuesWifiGroup():
                             user=ldap_user_name,
                             password=ldap_password,
                             auto_bind=True)
-    connection.search(root_dn, f'(&(objectclass=user)(sAMAccountName={current_user}))', attributes=['memberOf','mail','uid'])
+    connection.search(root_dn, f'(&(objectclass=user)(sAMAccountName={CURRENT_USER}))', attributes=['memberOf','mail','uid'])
     HasAdmin = False
     for user in sorted(connection.entries):
         for group in user.memberOf:
