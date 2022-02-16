@@ -35,7 +35,7 @@ def home():
 
 @app.route("/users/loggedInUser")
 def logged_in_user():
-    current_user = getuser()
+    current_user = {"loggedInUser":CURRENT_USER}
     return jsonify(current_user)
 
 @app.route("/users")

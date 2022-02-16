@@ -1,10 +1,11 @@
 import React from 'react'
 import { Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
 import { BsFillPersonFill, BsNutFill, BsFillGrid1X2Fill } from "react-icons/bs";
+import LoggedInUser from "./LoggedInUser"
 import './shared.css'
 
 function App() {
-
+  const loggedInUser = LoggedInUser();
   return (
       <Navbar variant="dark" bg="dark" expand="lg">
           <Container>
@@ -26,7 +27,7 @@ function App() {
               </Navbar.Collapse>
               <Navbar.Collapse className="justify-content-end">
                   <Navbar.Text>
-                      Signed in as: <a href="#login">LordOfTheRings</a>
+                      Signed in as: <a href="#login">{loggedInUser.loggedInUser}</a>
                   </Navbar.Text>
               </Navbar.Collapse>
           </Container>

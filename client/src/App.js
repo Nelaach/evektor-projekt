@@ -15,13 +15,11 @@ function App() {
                     <th>Jméno a přijmení</th>
                     <th>Email</th>
                     <th>Assets</th>
-                    <th>Logged In User</th>
                 </tr>
             </thead>
             <tbody>
                 {(typeof data.zamestnanci === 'undefined') ? (
                     <tr>
-                        <td>Loading...</td>
                         <td>Loading...</td>
                         <td>Loading...</td>
                         <td>Loading...</td>
@@ -34,7 +32,6 @@ function App() {
                                     <td>{emp.name}</td>
                                     <td>{emp.email}</td>
                                     <td>{emp.assets_count}</td>
-                                    <td>{loggedInUser}</td>
                                 </tr>
                             )
                         }
