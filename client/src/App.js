@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import './shared.css'
 
 function App() {
 
@@ -7,9 +8,9 @@ function App() {
 
   useEffect(() => {
       fetch('/users', {
-          headers : { 
+          headers : {
               'Content-Type': 'application/json',
-              'Accept': 'application/json'
+            //   'Accept': 'application/json'
           }
       }).then(
           res => {
@@ -23,27 +24,35 @@ function App() {
             console.log({ data })
           }
       )
-  }, [])  // [] for it only run once 
-  
-  return (
-    <table>
-        <thead>
-        <tr>
-            <th>Jméno a přijmení</th>
-            <th>Email</th>
-            <th>Assets</th>
+  }, [])  // [] for it only run once
 
-        </tr>
+  return (
+    <table className='styled-table' >
+        <thead>
+            <tr>
+                <th>Jméno a přijmení</th>
+                <th>Email</th>
+                <th>Assets</th>
+            </tr>
         </thead>
         <tbody>
         {(typeof data.zamestnanci === 'undefined') ? (
-            <p>Loading...</p>
+            <tr>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                <td>Loading...</td>
+            </tr>
         ) : (
-            data.zamestnanci.map(emp => 
-                <tr> <td>{emp.name}</td></tr>
-                
-                
-            )
+            data.zamestnanci.map((emp) => {
+                if (emp.assets_count !== 0) {
+                    return <tr key={emp.id.toString()}>   {/* https://reactjs.org/docs/lists-and-keys.html#keys */}
+                        <td>{emp.name}</td>
+                        <td>{emp.email}</td>
+                        <td>{emp.assets_count}</td>
+                    </tr>;
+                }
+                return ""
+            })
 
             // data.zamestnanci.map((emp, i) => (
             //     <p key="{i}"> {emp}</p>

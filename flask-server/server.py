@@ -23,10 +23,11 @@ snipeit = os.getenv("SNIPEIT")
 current_user = getuser()
 navbar = []
 
-headers = { 
+headers = {
     'Content-Type': 'application/json',
     'Authorization' : authorization,
-    'Accept':'application/json'}
+    # 'Accept':'application/json'
+}
 
 @app.route("/")
 def home():
@@ -50,7 +51,7 @@ def zamestnanec(id):
     return render_template('zamestnanec.html', navbar = [current_user, isInGuesWifiGroup()], id = id)
 #    r=requests.get(f"{snipeit}hardware/", headers = headers, verify=False)
 #    data = r.json()
-#    assets = data["rows"] 
+#    assets = data["rows"]
 #    persons_asset=[]
 #    for asset in assets:
 #        print(id,asset["assigned_to"]["id"])
@@ -83,5 +84,3 @@ def isInGuesWifiGroup():
 
 if __name__ == "__main__":
     app.run(host='localhost', port=5000, debug=True)
-
-
