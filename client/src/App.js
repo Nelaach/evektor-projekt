@@ -1,49 +1,28 @@
 import React from 'react'
-import Users from "./Users"
-import LoggedInUser from "./LoggedInUser"
+import Users from './pages/Users/users'
+import MyItems from './pages/MyItems/my-items'
+import Home from './pages/Home/home'
+import Navbar from "./Navbar"
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
 import './shared.css'
 
-function App() {
 
-    const data = Users()
-    const loggedInUser = LoggedInUser()
+
+const App = () => {
 
     return (
-        <table className='styled-table' >
-            <thead>
-                <tr>
-                    <th>Jméno a přijmení</th>
-                    <th>Email</th>
-                    <th>Assets</th>
-                </tr>
-            </thead>
-            <tbody>
-                {(typeof data.zamestnanci === 'undefined') ? (
-                    <tr>
-                        <td>Loading...</td>
-                        <td>Loading...</td>
-                        <td>Loading...</td>
-                    </tr>
-                ) : (
-                    data.zamestnanci.map((emp) => {
-                        if (emp.assets_count !== 0) {
-                            return (
-                                <tr key={emp.id.toString()}>{/* https://reactjs.org/docs/lists-and-keys.html#keys */}
-                                    <td>{emp.name}</td>
-                                    <td>{emp.email}</td>
-                                    <td>{emp.assets_count}</td>
-                                </tr>
-                            )
-                        }
-                        return ""
-                    })
+        <>
+            <Navbar />
 
-                    // data.zamestnanci.map((emp, i) => (
-                    //     <p key="{i}"> {emp}</p>
-                    // ))
-                )}
-            </tbody>
-        </table>
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/users' element={<Users />} />
+                <Route path='/my-items' element={<MyItems />} />
+            </Routes>
+
+        </>
     );
 }
 
