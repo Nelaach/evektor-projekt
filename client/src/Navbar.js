@@ -1,9 +1,9 @@
-import React from 'react'
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
-import { NavLink, Link } from 'react-router-dom'
 import { BsFillPersonFill, BsNutFill, BsFillGrid1X2Fill } from "react-icons/bs";
 import { LinkContainer } from 'react-router-bootstrap';
-import LoggedInUser from "./LoggedInUser"
+
+import LoggedInUser from "./helper/LoggedInUser"
+
 import './shared.css'
 
 function MyNavbar() {

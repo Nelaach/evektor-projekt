@@ -1,9 +1,9 @@
 import React from 'react';
-import UserData from '../../Users';
+import FetchUsers from '../../helper/fetchUsers';
 
 function Users() {
 
-    const data = UserData();
+    const data = FetchUsers();
 
     return (
         <div>
