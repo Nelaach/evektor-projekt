@@ -14,6 +14,7 @@ function Users() {
                         <th>Jméno a přijmení</th>
                         <th>Email</th>
                         <th>Assets</th>
+                        <th>List of assets</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,6 +23,7 @@ function Users() {
                             <td>Loading...</td>
                             <td>Loading...</td>
                             <td>Loading...</td>
+                            <td>Loading...</td>                            
                         </tr>
                     ) : (
                         data.zamestnanci.map((emp) => {
@@ -31,6 +33,7 @@ function Users() {
                                         <td>{emp.name}</td>
                                         <td>{emp.email}</td>
                                         <td>{emp.assets_count}</td>
+                                        <td><a href={"users/" + emp.id}>Přehled</a></td>
                                     </tr>
                                 )
                             }

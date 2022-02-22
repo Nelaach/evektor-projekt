@@ -16,6 +16,7 @@ const Users = () => {
             );
             let data = await response.json();
             setUsers(data);
+
         } catch {
             console.log("Fetching useres from SnipeIt failed");
         }

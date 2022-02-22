@@ -2,9 +2,11 @@ import React from 'react'
 import Users from './pages/Users/users'
 import MyItems from './pages/MyItems/my-items'
 import Home from './pages/Home/home'
-import Navbar from "./Navbar"
+import Navbar from "./components/Navbar/Navbar"
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom'
+import Assets from './pages/Users/assets'
+
 
 import './shared.css'
 import './index.css'
@@ -28,6 +30,8 @@ const App = () => {
                 <Route path='/' element={<Home />} />
                 <Route path='/users' element={<Users />} />
                 <Route path='/my-items' element={<MyItems />} />
+                <Route path='/users/:id' element={<Assets />} />
+
             </Routes>
 
         </>

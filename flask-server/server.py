@@ -35,7 +35,8 @@ def home():
 
 @app.route("/users/loggedInUser")
 def logged_in_user():
-    current_user = {"loggedInUser":CURRENT_USER}
+    isInGuestWifiGroup = str(isInGuesWifiGroup())
+    current_user = {"loggedInUser":CURRENT_USER, "isInGuestWifiGroup":isInGuestWifiGroup}
     return jsonify(current_user)
 
 @app.route("/users")
@@ -48,6 +49,13 @@ def seznam():
     return json.dumps(zamestnanci)
 
     return render_template('seznam.html', navbar = [CURRENT_USER, is_in_guestWifi_group], zamestnanci = zamestnanci)
+
+@app.route("/hardware")
+def hardware():
+    r=requests.get(f"{snipeit}hardware/", headers = HEADERS, verify=False)
+    data = r.json()
+    hardware = data["rows"]
+    return json.dumps(hardware)
 
 @app.route('/seznam/<id>')
 def zamestnanec(id):
