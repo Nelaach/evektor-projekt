@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react'
+import { useState, useLayoutEffect} from 'react'
 
 const Users = () => {
 
@@ -22,7 +22,7 @@ const Users = () => {
         }
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         fetchData();
     }, []);
 

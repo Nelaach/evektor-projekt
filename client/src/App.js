@@ -31,7 +31,6 @@ const App = () => {
                 <Route path='/users' element={<Users />} />
                 <Route path='/my-items' element={<MyItems />} />
                 <Route path='/users/:id' element={<Assets />} />
-
             </Routes>
 
         </>

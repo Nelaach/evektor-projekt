@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useLayoutEffect } from 'react'
 
 const LoggedInUser = () => {
 
     const [loggedInUser, setData] = useState([{}])
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         fetch('/users/loggedInUser', {
             headers: {
                 'Content-Type': 'application/json',

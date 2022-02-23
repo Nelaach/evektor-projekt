@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react'
+import { useState, useLayoutEffect} from 'react'
 
 const Hardware = () => {
 
@@ -21,7 +21,7 @@ const Hardware = () => {
         }
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         fetchData();
     }, []);
 

@@ -69,7 +69,7 @@ def zamestnanec(id):
 #        if int(asset["assigned_to"]["id"]) == int(id):
 #            persons_asset = asset
 #            break
-#
+
 #    return render_template('zamestnanec.html', navbar = [CURRENT_USER, isInGuesWifiGroup()], persons_asset = persons_asset)
 
 @app.route("/members")

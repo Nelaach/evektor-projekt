@@ -34,9 +34,6 @@ function Assets() {
                                 </tr>
                             )
                             }
-                            else {
-                                return(<div>Žádný nalezený HW</div>)
-                            }
                         })
                     )}
                 </tbody>
