@@ -7,8 +7,12 @@ import os
 from getpass import getuser
 import requests
 import json
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app)
+
+
 
 load_dotenv()
 
@@ -50,6 +54,13 @@ def seznam():
 
     return render_template('seznam.html', navbar = [CURRENT_USER, is_in_guestWifi_group], zamestnanci = zamestnanci)
 
+@app.route("/users/<id>/assets")
+def user_asset(id):
+    r=requests.get(f"{snipeit}users/{id}/assets", headers = HEADERS, verify=False)
+    data = r.json()
+    assets = {"assets": data["rows"]}
+    return json.dumps(assets)
+
 @app.route("/hardware")
 def hardware():
     r=requests.get(f"{snipeit}hardware/", headers = HEADERS, verify=False)
@@ -57,20 +68,12 @@ def hardware():
     hardware = data["rows"]
     return json.dumps(hardware)
 
-@app.route('/seznam/<id>')
-def zamestnanec(id):
-    return render_template('zamestnanec.html', navbar = [CURRENT_USER, isInGuesWifiGroup()], id = id)
-#    r=requests.get(f"{snipeit}hardware/", headers = HEADERS, verify=False)
-#    data = r.json()
-#    assets = data["rows"]
-#    persons_asset=[]
-#    for asset in assets:
-#        print(id,asset["assigned_to"]["id"])
-#        if int(asset["assigned_to"]["id"]) == int(id):
-#            persons_asset = asset
-#            break
-
-#    return render_template('zamestnanec.html', navbar = [CURRENT_USER, isInGuesWifiGroup()], persons_asset = persons_asset)
+@cross_origin(origin='*')
+@app.route("/hardware/<id>")
+def specificHardware(id):
+    r=requests.get(f"{snipeit}hardware/{id}", headers = HEADERS, verify=False)
+    data = r.json()
+    return json.dumps(data)
 
 @app.route("/members")
 def members():

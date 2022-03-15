@@ -26,25 +26,6 @@ const Users = () => {
         fetchData();
     }, []);
 
-    // useEffect(() => {
-    //     fetch('/users', {
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         }
-    //     }).then(
-    //         res => {
-    //             console.log({ res });
-    //             return res.json();
-    //         }
-    //     ).then(
-    //         data => {
-    //             console.log("Data?")
-    //             setUsers(data)  // with 'setData' function we will fill 'data' variable of const [data, ...]
-    //             console.log({ data })
-    //         }
-    //     )
-    // }, [])  // [] for it only run once
-
     return users
 }
 
