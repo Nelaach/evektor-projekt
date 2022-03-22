@@ -65,10 +65,9 @@ def user_asset(id):
 def hardware():
     r=requests.get(f"{snipeit}hardware/", headers = HEADERS, verify=False)
     data = r.json()
-    hardware = data["rows"]
+    hardware = {"hardware": data["rows"]}
     return json.dumps(hardware)
 
-@cross_origin(origin='*')
 @app.route("/hardware/<id>")
 def specificHardware(id):
     r=requests.get(f"{snipeit}hardware/{id}", headers = HEADERS, verify=False)
