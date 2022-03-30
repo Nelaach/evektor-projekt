@@ -68,6 +68,18 @@ def hardware():
     hardware = {"hardware": data["rows"]}
     return json.dumps(hardware)
 
+@app.route("/hardware/<id>/checkin")
+def checkin(id):
+    r=requests.post(f"{snipeit}hardware/{id}/checkin", headers = HEADERS, verify=False)
+    data = str(r.status_code)
+    return data
+
+@app.route("/hardware/<id>/checkout")
+def checkout(id):
+    r=requests.post(f"{snipeit}hardware/{id}/checkout", headers = HEADERS, verify=False)
+    data = str(r.status_code)
+    return data    
+
 @app.route("/hardware/<id>")
 def specificHardware(id):
     r=requests.get(f"{snipeit}hardware/{id}", headers = HEADERS, verify=False)
